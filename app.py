@@ -12,7 +12,7 @@ CITIES = [
     {"name": "нью-йорк", "image_id": "1652229/361bf18a372f813d17e3"},
     {"name": "париж", "image_id": "1521359/3bb5bc215c38e44d07e1"},
     {"name": "париж", "image_id": "1540737/cbf6fe4d55036f4a09f6"}
-    ]
+]
 
 HELP_TEXT = (
     "Это игра 'Угадай город'! Я показываю фото города, а ты пытаешься угадать, что это за город. "
@@ -27,8 +27,7 @@ HELP_TEXT = (
 def alice_skill():
     req = request.get_json()
     user_message = req.get("request", {}).get("original_utterance", "").lower()
-    session_state = req.get("state", {}).get(
-        "session", {})
+    session_state = req.get("state", {}).get("session", {})
 
     current_stage = session_state.get("stage", "initial")
     current_city = session_state.get("current_city", None)
@@ -72,8 +71,7 @@ def alice_skill():
             response["response"]["card"] = {
                 "type": "BigImage",
                 "image_id": selected_city["image_id"],
-                "title": selected_city["description"],
-                "description": "Назови город!"
+                "description": "Что это за город?"
             }
             response["session_state"] = {
                 "stage": "awaiting_answer", "current_city": selected_city["name"]}
@@ -97,8 +95,7 @@ def alice_skill():
             response["response"]["card"] = {
                 "type": "BigImage",
                 "image_id": [city["image_id"] for city in CITIES if city["name"] == current_city][0],
-                "title": "Что это за город?",
-                "description": False"
+                "description": "Что это за город?"
             }
             response["session_state"] = {
                 "stage": "awaiting_answer", "current_city": current_city}
@@ -111,8 +108,7 @@ def alice_skill():
             response["response"]["card"] = {
                 "type": "BigImage",
                 "image_id": selected_city["image_id"],
-                "title": "Что это за город?",
-                "description": False"
+                "description": "Что это за город?"
             }
             response["session_state"] = {
                 "stage": "awaiting_answer", "current_city": selected_city["name"]}
