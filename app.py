@@ -82,12 +82,18 @@ def alice_skill():
 
     elif current_stage == "awaiting_answer":
         if user_message in [city["name"] for city in CITIES]:
+            map_url = f"https://yandex.ru/maps/?mode=search&text={current_city}"
             if user_message == current_city:
                 response["response"]["text"] = f"Верно! Это {current_city.title()}! Молодец! Сыграем ещё раз?"
                 response["response"]["tts"] = f"Верно! Это {current_city.title()}! Молодец! Сыграем ещё раз?"
             else:
                 response["response"]["text"] = f"Увы, это не {user_message.title()}. Правильный ответ: {current_city.title()}. Сыграем ещё раз?"
                 response["response"]["tts"] = f"Увы, это не {user_message.title()}. Правильный ответ: {current_city.title()}. Сыграем ещё раз?"
+            response["response"]["buttons"].append({
+                "title": "Показать город на карте",
+                "url": map_url,
+                "hide": True
+            })
             response["session_state"] = {"stage": "game_ended"}
         else:
             response["response"]["text"] = "Кажется, такого города нет в игре. Попробуй ещё раз! Какой это город?"
