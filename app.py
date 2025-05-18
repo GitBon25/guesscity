@@ -34,7 +34,7 @@ def alice_skill():
                 "tts": "Отлично! Вот фото города. Отгадай, что это за город?",
                 "card": {
                     "type": "BigImage",
-                    "image_id": "1521359/3bb5bc215c38e44d07e1"
+                    "image_id": "1521359/3bb5bc215c38e44d07e1",
                     "title": "Город с башней",
                     "description": "Что за город?"
                 },
